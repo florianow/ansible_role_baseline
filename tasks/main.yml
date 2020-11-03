@@ -1,0 +1,128 @@
+---
+### install basic packages for both ###
+- name: Install and enable EPEL
+  yum:
+    name: epel-release
+  when:
+      - base_enable_epel is defined
+      - ansible_distribution == "CentOS"
+
+- name: Install basic packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ basic_packages }}"
+  when: base_basic_packages is defined
+
+### install stuff only on CentOS ###
+- name: CENTOS STUFF
+  block:
+
+  - name: Install CentOS packages 
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ basic_Centos_packages }}"
+    when: 
+      - base_Centos_packages is defined
+      
+  - name: Install basic Firewall CentOS
+    package: 
+      name: "{{firewall_firewalld}}"
+      state: present
+    when: 
+      - base_firewall|bool
+
+  - name: Ensure firewalld is started and enabled
+    systemd:
+      name: firewalld
+      state: started
+      enabled: true
+    when:
+      - base_firewall|bool
+
+  - name: Enable firewalld services
+    firewalld:
+      permanent: yes
+      service: "{{ item }}"
+      state: enabled
+    loop: "{{ base_fw_services }}"
+    notify:
+      - firewalld restart
+    when:
+      
+      - base_fw_services
+      - base_firewall|bool
+
+  when: ansible_distribution == "CentOS"
+
+### install only stuff on Ubuntu or Debian ###
+- name: UBUNTU STUFF
+  block:
+
+  - name: Configure basic Firewall on Debian systems
+    package: 
+      name: "{{ firewall_ufw }}"
+      state: present
+    when: 
+      - base_firewall|bool
+
+  - name: Enable ufw
+    ufw: state=enabled
+
+  - name: Set logging
+    ufw:
+      logging: on
+
+  - name: Enable ufw services
+    ufw:
+      rule: allow
+      port: "{{ item }}"
+    loop: "{{ base_fw_services }}"
+    notify:
+      - ufw restart
+    when:
+      - base_firewall|bool
+
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+### Install on both systems Stuff ###
+- name: BOTH STUFF
+  block: 
+
+  - name: Secure SSH configuration
+    template: src=etc/ssh/sshd_config dest=/etc/ssh
+    notify: sshd restart
+    when: base_secure_sshd|bool
+
+  - name: Configure Fail2Ban to protect ssh
+    template: src=etc/fail2ban/jail.local.json dest=/etc/fail2ban/jail.local
+    when: base_fail2ban_configuration|bool
+
+  - name: Enable service Fail2ban
+    service: 
+      name: fail2ban
+      enabled: yes
+
+  - name: Make sure we have a 'wheel' group
+    group:
+      name: wheel
+      state: present
+    when: base_rootuser|bool
+
+  - name: Allow 'wheel' group to have passwordless sudo
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: '^%wheel'
+      line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'
+    when: base_rootuser|bool
+
+  - name: Add sudoers users to wheel group
+    user: name="{{your_root_user}}" groups=wheel append=yes state=present createhome=yes shell=/bin/bash
+    when: base_rootuser|bool
+
+  - name: Set up authorized keys for the deployer user
+    authorized_key: user="{{your_root_user}}" key="{{rsa_key}}"
+    when: base_rootuser|bool

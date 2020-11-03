@@ -1,0 +1,43 @@
+---
+# defaults file for base
+base_secure_sshd: true
+base_fail2ban_configuration: true
+base_fw_services: []
+base_basic_packages: true
+base_enable_epel: true
+base_utility_packages: true
+base_rootuser: true
+base_firewall: true
+base_Centos_packages: true
+user_name: ""
+rsa_key: ""
+
+basic_packages:
+  - git
+  - fail2ban
+  - tmux
+  - telnet
+  - vim
+  - tcpdump
+  - net-tools
+  - unzip
+  - mlocate
+  - wget
+  - vim
+  - cifs-utils
+  - screen
+  - htop
+  - tree
+  - wget
+  - openssh-server
+
+basic_Centos_packages:
+  - yum-utils
+  - setroubleshoot
+  - policycoreutils-python
+
+# install basic firewall  
+firewall_firewalld: "firewalld"
+firewall_ufw: "ufw"
+
+
