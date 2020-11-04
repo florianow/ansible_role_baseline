@@ -125,7 +125,7 @@
         groups: wheel
         append: yes
         state: present
-        create_home:
+        create_home: yes
         shell: /bin/bash
 
     - name: Set up authorized keys for the deployer user
