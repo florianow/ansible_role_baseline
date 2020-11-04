@@ -1,13 +1,9 @@
 ---
 language: python
 services:
- - docker
+  - docker
 install:
- - python -m pip3 install molecule docker
- - python -m pip3 install flake8
- - python -m pip3 install yamllint
-
+  - python3 -m pip install molecule
+  # - python3 -m pip install required driver (e.g. docker, shade, boto, apache-libcloud)
 script:
- - molecule --version
- - ansible --version
- - molecule lint
+  - molecule test
