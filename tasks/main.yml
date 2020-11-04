@@ -131,5 +131,5 @@
     - name: Set up authorized keys for the deployer user
       authorized_key:
         user: "{{ your_root_user }}"
-        key: ="{{ rsa_key }}"
+        key: "{{ rsa_key }}"
   when: your_root_user is defined
