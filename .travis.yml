@@ -3,6 +3,7 @@ language: python
 services:
   - docker
 install:
-  - python3 -m pip install ansible molecule testinfra 
+  - python3 -m pip install ansible testinfra 
+  - python3 -m pip install molecule[docker]
 script:
   - molecule lint
