@@ -85,16 +85,16 @@
 
 # Install on both systems Stuff ###
 - name: Secure SSH configuration
-  template: 
-    src: etc/ssh/sshd_confi
-    dest: /etc/ssh
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/
     mode: 0644
   notify: sshd restart
   when: base_secure_sshd|bool
 
 - name: Configure Fail2Ban to protect ssh
-  template: 
-    src: etc/fail2ban/jail.local.json 
+  template:
+    src: jail.local.j2
     dest: /etc/fail2ban/jail.local
     mode: 0644
   when: base_fail2ban_configuration|bool
