@@ -4,8 +4,12 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: instance
+  - name: centos8
     image: centos:8
+    command: /sbin/init
+    privileged: True
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     pre_build_image: true
 lint: |
   set -e

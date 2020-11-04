@@ -9,8 +9,10 @@ base_utility_packages: true
 base_rootuser: true
 base_firewall: true
 base_Centos_packages: true
-user_name: "foouser"
-rsa_key: ""
+
+# when definded condition
+#your_root_user: "foobar"
+#rsa_key: "yolo"
 
 basic_packages:
   - git
@@ -34,7 +36,7 @@ basic_packages:
 basic_Centos_packages:
   - yum-utils
   - setroubleshoot
-  - policycoreutils-python
+  - sudo
 
 # install basic firewall
 firewall_firewalld: "firewalld"

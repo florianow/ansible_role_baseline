@@ -98,33 +98,32 @@
     name: fail2ban
     enabled: yes
 
-- name: Make sure we have a 'wheel' group
-  group:
-    name: wheel
-    state: present
-  when: base_rootuser|bool
+- name: your root user
+  block:
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: wheel
+        state: present
 
-- name: Allow 'wheel' group to have passwordless sudo
-  lineinfile:
-    dest: /etc/sudoers
-    state: present
-    regexp: '^%wheel'
-    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
-  when: base_rootuser|bool
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
 
-- name: Add sudoers users to wheel group
-  user:
-    name: "{{ your_root_user }}"
-    groups: wheel
-    append: yes
-    state: present
-    create_home:
-    shell: /bin/bash
-  when: base_rootuser|bool
+    - name: Add sudoers users to wheel group
+      user:
+        name: "{{ your_root_user }}"
+        groups: wheel
+        append: yes
+        state: present
+        create_home:
+        shell: /bin/bash
 
-- name: Set up authorized keys for the deployer user
-  authorized_key:
-    user: "{{ your_root_user }}"
-    key: ="{{ rsa_key }}"
-  when: base_rootuser|bool
+    - name: Set up authorized keys for the deployer user
+      authorized_key:
+        user: "{{ your_root_user }}"
+        key: ="{{ rsa_key }}"
+  when: your_root_user is defined
