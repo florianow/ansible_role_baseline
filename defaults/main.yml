@@ -9,10 +9,11 @@ base_utility_packages: true
 base_rootuser: true
 base_firewall: true
 base_Centos_packages: true
+base_se_linux_status: permissive
 
-# when definded condition
-#your_root_user: "foobar"
-#rsa_key: "yolo"
+# when defined condition
+# your_root_user: "foobar"
+# rsa_key: "yolo"
 
 basic_packages:
   - git
@@ -37,6 +38,11 @@ basic_Centos_packages:
   - yum-utils
   - setroubleshoot
   - sudo
+  - policycoreutils
+  - policycoreutils-python-utils
+  - setools
+  - setools-console
+  - setroubleshoot
 
 # install basic firewall
 firewall_firewalld: "firewalld"

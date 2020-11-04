@@ -52,6 +52,11 @@
         - base_fw_services
         - base_firewall|bool
 
+    - name: activate SELinux
+      selinux:
+        policy: targeted
+        state: "{{ base_se_linux_status }}"
+
   when: ansible_distribution == "CentOS"
 
 # install only stuff on Ubuntu or Debian ###
