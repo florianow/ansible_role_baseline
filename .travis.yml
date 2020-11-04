@@ -1,19 +1,13 @@
 ---
 language: python
 services:
-  - docker
+ - docker
 install:
-  - python3 -m pip install ansible
-  - python3 -m pip install molecule
-  - python3 -m pip3 install flake8
-  - python3 -m pip3 install yamllint
-  - docker -v
-  - python3 -v
-  - ansible --version
-  - molecule --version
-  - ansible-lint --version
+ - python -m pip3 install molecule docker
+ - python -m pip3 install flake8
+ - python -m pip3 install yamllint
+
 script:
-  - molecule --version
-  - ansible --version
-  - molecule lint
-  - molecule test
+ - molecule --version
+ - ansible --version
+ - molecule lint
