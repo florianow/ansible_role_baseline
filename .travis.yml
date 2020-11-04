@@ -4,6 +4,6 @@ services:
   - docker
 install:
   - python3 -m pip install ansible testinfra 
-  - python3 -m pip install molecule[docker]
+  - python3 -m pip install molecule[docker,lint]
 script:
   - molecule lint
