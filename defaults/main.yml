@@ -11,8 +11,8 @@ base_firewall: true
 base_Centos_packages: true
 
 # when definded condition
-your_root_user: "foobar"
-rsa_key: "yolo"
+#your_root_user: "foobar"
+#rsa_key: "yolo"
 
 basic_packages:
   - git
