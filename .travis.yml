@@ -1,5 +1,4 @@
 ---
-sudo: required
 language: python
 services:
   - docker
@@ -7,4 +6,6 @@ install:
   - python3 -m pip install molecule
   # - python3 -m pip install required driver (e.g. docker, shade, boto, apache-libcloud)
 script:
+  - molecule --version
+  - ansible --version
   - molecule test
