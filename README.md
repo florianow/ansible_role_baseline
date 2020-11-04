@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/vegantofuboy/role-ansible-baseline.svg?branch=main)](https://travis-ci.org/vegantofuboy/role-ansible-baseline)
+[![Build Status](https://travis-ci.org/vegantofuboy/ansible_role_baseline.svg?branch=main)](https://travis-ci.org/vegantofuboy/ansible_role_baseline)
 
 Role Name
 =========
