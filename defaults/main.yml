@@ -9,7 +9,7 @@ base_utility_packages: true
 base_rootuser: true
 base_firewall: true
 base_Centos_packages: true
-user_name: ""
+user_name: "foouser"
 rsa_key: ""
 
 basic_packages:
@@ -36,8 +36,6 @@ basic_Centos_packages:
   - setroubleshoot
   - policycoreutils-python
 
-# install basic firewall  
+# install basic firewall
 firewall_firewalld: "firewalld"
 firewall_ufw: "ufw"
-
-
