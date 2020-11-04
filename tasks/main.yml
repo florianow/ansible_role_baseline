@@ -1,5 +1,5 @@
 ---
-### install basic packages for both ###
+# install basic packages for both
 - name: Install and enable EPEL
   yum:
     name: epel-release
@@ -14,7 +14,7 @@
   with_items: "{{ basic_packages }}"
   when: base_basic_packages is defined
 
-### install stuff only on CentOS ###
+# install stuff only on CentOS ###
 - name: CENTOS STUFF
   block:
     - name: Install CentOS packages
@@ -54,7 +54,7 @@
 
   when: ansible_distribution == "CentOS"
 
-### install only stuff on Ubuntu or Debian ###
+# install only stuff on Ubuntu or Debian ###
 - name: UBUNTU STUFF
   block:
     - name: Configure basic Firewall on Debian systems
@@ -83,14 +83,16 @@
 
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
-### Install on both systems Stuff ###
+# Install on both systems Stuff ###
 - name: Secure SSH configuration
   template: src=etc/ssh/sshd_config dest=/etc/ssh
+  mode: 0644
   notify: sshd restart
   when: base_secure_sshd|bool
 
 - name: Configure Fail2Ban to protect ssh
   template: src=etc/fail2ban/jail.local.json dest=/etc/fail2ban/jail.local
+  mode: 0644
   when: base_fail2ban_configuration|bool
 
 - name: Enable service Fail2ban

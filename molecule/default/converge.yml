@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include ansible-role-baseline"
+    - name: "Include ansible_role_baseline"
       include_role:
-        name: "ansible-role-baseline"
+        name: "ansible_role_baseline"
