@@ -43,9 +43,8 @@
     - name: Enable firewalld services
       firewalld:
         permanent: yes
-        service: "{{ item }}"
+        service: "{{ base_fw_services }}"
         state: enabled
-      loop: "{{ base_fw_services }}"
       notify:
         - firewalld restart
       when:
@@ -56,6 +55,7 @@
       selinux:
         policy: targeted
         state: "{{ base_se_linux_status }}"
+      when: base_se_linux_status is defined
 
   when: ansible_distribution == "CentOS"
 
