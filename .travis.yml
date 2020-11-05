@@ -7,5 +7,7 @@ install:
   - python3 -m pip install molecule[docker,lint]
 script:
   - molecule converge
+language: bash
+script: true
 after_success:
   - ./travis_merge_script.sh
