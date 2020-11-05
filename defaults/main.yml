@@ -2,10 +2,10 @@
 # defaults file for base
 base_secure_sshd: true
 base_fail2ban_configuration: true
-base_fw_services: 
+base_fw_services:
   - http
   - https
-  - ssh 
+  - ssh
 base_basic_packages: true
 base_enable_epel: true
 base_utility_packages: true

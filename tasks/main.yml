@@ -43,12 +43,12 @@
     - name: Enable firewalld services
       firewalld:
         permanent: yes
-        service: "{{ base_fw_services }}"
+        service: "{{ item }}"
         state: enabled
+      loop: "{{ base_fw_services }}"
       notify:
         - firewalld restart
       when:
-        - base_fw_services
         - base_firewall|bool
 
     - name: activate SELinux
