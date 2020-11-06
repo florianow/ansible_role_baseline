@@ -49,8 +49,13 @@
       notify:
         - firewalld restart
       when:
-        - base_fw_services
         - base_firewall|bool
+
+    - name: activate SELinux
+      selinux:
+        policy: targeted
+        state: "{{ base_se_linux_status }}"
+      when: base_se_linux_status is defined
 
   when: ansible_distribution == "CentOS"
 
