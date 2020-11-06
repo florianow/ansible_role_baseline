@@ -2,10 +2,12 @@
 language: python
 services:
   - docker
+before_install:
+  - chmod +x ./travis_merge.sh
 install:
   - python3 -m pip install ansible testinfra
   - python3 -m pip install molecule[docker,lint]
 script:
   - molecule converge
 after_success:
-  - ./travis_merge.sh  
+  - ./travis_merge.sh
