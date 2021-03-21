@@ -8,6 +8,7 @@ install:
   - python3 -m pip install ansible testinfra
   - python3 -m pip install molecule[docker,lint]
 script:
+  - molecule --version
   - molecule converge
 after_success:
   - ./travis_merge.sh
