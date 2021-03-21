@@ -5,8 +5,9 @@ driver:
   name: docker
 platforms:
   - name: ubuntu
-    image: jgeusebroek/ubuntu2004-molecule
-    command: /sbin/init
+    image: geerlingguy/docker-ubuntu2004-ansible
+    command:
+     - /sbin/init
     privileged: True
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
