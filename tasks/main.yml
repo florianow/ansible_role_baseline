@@ -1,27 +1,25 @@
 ---
-# install basic packages for both
-- name: Install and enable EPEL
-  yum:
-    name: epel-release
-  when:
-    - base_enable_epel is defined
-    - ansible_distribution == "CentOS"
-
-- name: Install basic packages
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ basic_packages }}"
-  when: base_basic_packages is defined
-
 # install stuff only on CentOS ###
 - name: CENTOS STUFF
   block:
+
+    # install basic packages for both
+    - name: Install and enable EPEL
+      yum:
+        name: epel-release
+      when:
+        - base_enable_epel is defined
+
+    - name: Install basic packages
+      package:
+        name: "{{ basic_packages }}"
+        state: present
+      when: base_basic_packages is defined
+
     - name: Install CentOS packages
       package:
-        name: "{{ item }}"
+        name: "{{ basic_Centos_packages }}"
         state: present
-      with_items: "{{ basic_Centos_packages }}"
       when:
         - base_Centos_packages is defined
 
@@ -49,14 +47,27 @@
       notify:
         - firewalld restart
       when:
-        - base_fw_services
         - base_firewall|bool
+
+    - name: activate SELinux
+      selinux:
+        policy: targeted
+        state: "{{ base_se_linux_status }}"
+      when: base_se_linux_status is defined
 
   when: ansible_distribution == "CentOS"
 
 # install only stuff on Ubuntu or Debian ###
 - name: UBUNTU STUFF
   block:
+
+    - name: Update repositories cache and install packages
+      apt:
+        name: "{{ basic_packages }}"
+        update_cache: yes
+      when:
+      - base_basic_packages is defined
+
     - name: Configure basic Firewall on Debian systems
       package:
         name: "{{ firewall_ufw }}"
