@@ -75,22 +75,24 @@
       when:
         - base_firewall|bool
 
-    - name: Enable ufw
-      ufw: state=enabled
+#TODO ERROR in TravisCI: p6tables or your kernel needs to be upgraded.\n\n"}
 
-    - name: Set logging
-      ufw:
-        logging: on
+    # - name: Enable ufw
+    #   ufw: state=enabled
 
-    - name: Enable ufw services
-      ufw:
-        rule: allow
-        port: "{{ item }}"
-      loop: "{{ base_fw_services }}"
-      notify:
-        - ufw restart
-      when:
-        - base_firewall|bool
+    # - name: Set logging
+    #   ufw:
+    #     logging: on
+
+    # - name: Enable ufw services
+    #   ufw:
+    #     rule: allow
+    #     port: "{{ item }}"
+    #   loop: "{{ base_fw_services }}"
+    #   notify:
+    #     - ufw restart
+    #   when:
+    #     - base_firewall|bool
 
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
