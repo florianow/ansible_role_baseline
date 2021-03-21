@@ -5,7 +5,7 @@ services:
 before_install:
   - chmod +x ./travis_merge.sh
 install:
-  - python3 -m pip install ansible testinfra
+  - python3 -m pip install ansible==2.10.7 testinfra
   - python3 -m pip install molecule[docker,lint]
 script:
   - molecule converge
