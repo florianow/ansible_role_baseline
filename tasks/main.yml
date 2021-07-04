@@ -88,6 +88,7 @@
       ufw:
         rule: allow
         port: "{{ item }}"
+        proto: tcp
       loop: "{{ base_fw_services }}"
       notify:
         - ufw restart
