@@ -79,6 +79,8 @@
 
     - name: Enable ufw
       ufw: state=enabled
+      when:
+        - base_firewall|bool
 
     - name: Set logging
       ufw:
