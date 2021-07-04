@@ -8,7 +8,7 @@ base_fw_services:
   - ssh
 base_basic_packages: true
 base_enable_epel: true
-base_utility_packages: true
+#base_utility_packages: true
 base_rootuser: true
 base_firewall: true
 base_Centos_packages: true
