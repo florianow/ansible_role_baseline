@@ -105,6 +105,7 @@
     src: sshd_config.j2
     dest: /etc/ssh/
     mode: 0644
+    force: true
   notify: sshd restart
   when: base_secure_sshd|bool
 
