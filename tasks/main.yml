@@ -21,7 +21,7 @@
         name: "{{ basic_Centos_packages }}"
         state: present
       when:
-        - base_Centos_packages is defined
+        - base_Centos_packages | bool
 
     - name: Install basic Firewall CentOS
       package:
@@ -66,7 +66,7 @@
         name: "{{ basic_packages }}"
         update_cache: yes
       when:
-      - base_basic_packages is defined
+      - base_basic_packages | bool
 
     - name: Configure basic Firewall on Debian systems
       package:
