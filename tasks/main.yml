@@ -8,7 +8,7 @@
       yum:
         name: epel-release
       when:
-        - base_enable_epel is defined
+        - base_enable_epel | bool
 
     - name: Install basic packages
       package:
