@@ -12,7 +12,9 @@ base_Centos_packages: true
 
 # when definded condition
 #your_root_user: "foobar"
-#rsa_key: "yolo"
+#pub_key: "yolo"
+#base_se_linux_status:
+
 
 basic_packages:
   - git
