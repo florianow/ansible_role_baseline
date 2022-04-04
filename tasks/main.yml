@@ -85,6 +85,8 @@
     - name: Set logging
       ufw:
         logging: on
+      when:
+        - base_firewall|bool
 
     - name: Enable ufw services
       ufw:
