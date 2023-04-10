@@ -74,6 +74,13 @@
         state: present
       when:
         - base_firewall|bool
+     
+    # Install "foo" and "bar" snap
+    - name: Install foo
+      snap:
+        name: "{{ snap_packages }}"
+      when:
+      - base_snap_packages | bool
 
 #TODO ERROR in TravisCI: p6tables or your kernel needs to be upgraded.\n\n"}
 
