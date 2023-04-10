@@ -67,6 +67,7 @@
         update_cache: yes
       when:
       - base_basic_packages | bool
+      become: yes
 
     - name: Configure basic Firewall on Debian systems
       package:
