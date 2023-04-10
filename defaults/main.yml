@@ -7,6 +7,7 @@ base_fw_services:
   - https
   - ssh
 base_basic_packages: true
+base_snap_packages: true
 base_enable_epel: true
 #base_utility_packages: true
 base_rootuser: true
@@ -17,6 +18,9 @@ base_Centos_packages: true
 # base_se_linux_status: permissive
 # your_root_user: "foobar"
 # rsa_key: "yolo"
+
+snap_packages:
+  - multipass
 
 basic_packages:
   - git
