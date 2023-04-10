@@ -75,8 +75,7 @@
       when:
         - base_firewall|bool
      
-    # Install "foo" and "bar" snap
-    - name: Install foo
+    - name: Install snap packages
       snap:
         name: "{{ snap_packages }}"
       when:
