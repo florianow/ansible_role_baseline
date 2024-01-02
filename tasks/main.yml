@@ -78,6 +78,7 @@
     - name: Install snap packages
       snap:
         name: "{{ snap_packages }}"
+        classic: true
       when:
         - base_snap_packages | bool
 
