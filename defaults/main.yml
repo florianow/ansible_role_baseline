@@ -41,6 +41,9 @@ basic_packages:
   - wget
   - openssh-server
 
+pip_packages:
+  - jinja2
+
 basic_Centos_packages:
   - yum-utils
   - setroubleshoot
