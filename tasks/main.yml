@@ -79,7 +79,13 @@
       snap:
         name: "{{ snap_packages }}"
       when:
-      - base_snap_packages | bool
+        - base_snap_packages | bool
+
+    - name: Install bottle python package
+      pip:
+        name: "{{ pip_packages }}"
+      when:
+        - base_pip_packages | bool
 
 #TODO ERROR in TravisCI: p6tables or your kernel needs to be upgraded.\n\n"}
 
